@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
+<title>サンプル</title>
+<style>
+body {
+  padding-top: 100px;
+}
+.starter-template {
+  padding: 40px 15px;
+  text-align: center;
+}
+</style>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <p><h1 id="title">ログイン</h1></p>
+        </div>
+        <div class="row">
+            <div class="col-md-3 col-lg-3"></div>
+            <div class="col-md-6 col-lg-6">
+                <div class="well well-sm">
+                    <form id="login_form" method="post" th:action="@{'/login'}">
+                        <fieldset id="login_field">
+                            <div class="form-group">
+                                <label>ログインID</label>
+                                <input type="text" class="form-control" id="login_id" name="login_id" placeholder="ログインIDを入力してください" autofocus="" required="" />
+                            </div>
+                            <div class="form-group">
+                                <label>パスワード</label>
+                                <input type="password" class="form-control" id="login_password" name="login_password" placeholder="パスワードを入力してください" required="" />
+                            </div>
+                            <div class="form-group">
+                                <input id="login_button" type="submit" value="ログイン" />
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+            <div class="col-md-3 col-lg-3"></div>
+        </div>
+    </div>
+<script
+  src="https://code.jquery.com/jquery-3.1.1.min.js"
+  integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+  crossorigin="anonymous"></script>
+<script type="text/javascript">
+    $(function(){
+        var ws = new WebSocket("ws://localhost:8080/echo");
+        ws.onopen = function(){
+        };
+        ws.onclose = function(){
+        };
+        ws.onmessage = function(message){
+            $("#result").text(message.data);
+            location.href = "/attend/";
+        };
+        ws.onerror = function(event){
+            alert("接続に失敗しました。");
+        };
+    });
+</script>
+</body>
+</html>
